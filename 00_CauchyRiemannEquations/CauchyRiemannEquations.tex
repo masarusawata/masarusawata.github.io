@@ -1,0 +1,117 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+\usepackage{adjustbox}
+\usepackage{graphicx}
+\usepackage[final]{pdfpages}
+\usepackage{bm}
+\usepackage{sectsty}
+\usepackage{titlesec}
+\usepackage{lipsum}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{pgffor}
+\usepackage{rotating}
+\usepackage{xcolor}  
+\usepackage{amsthm}
+\usepackage{csvsimple}
+\usepackage{enumitem}
+\usepackage{amssymb} 
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+% \setlength{\tabcolsep}{0.5cm} 
+\newcommand{\thickhat}[1]{\mathbf{\hat{\text{$#1$}}}}
+\renewcommand{\lstlistingname}{Program}
+
+\newtheoremstyle{custom}
+  {3pt}
+  {3pt}
+  {\itshape}
+  {} 
+  {\bfseries}
+  {. }  
+  { }   
+  {\thmname{#1} \thmnumber{#2} \thmnote{ #3}}
+
+\theoremstyle{custom}
+
+
+\newtheorem{definition}{Definition}
+% \newtheorem{theorem}{Theorem}
+\newtheorem*{theorem}{Theorem}
+\sectionfont{\fontsize{12}{15}\selectfont}
+\titleformat{\section}
+{\normalfont\normalsize\bfseries}
+{(\thesection)}{1em}{}
+
+\title{Cauchy--Riemann Equations}
+\author{Masaru Sawata}
+\begin{document}
+
+\maketitle
+
+\begin{theorem}[Cauchy--Riemann Equations]
+\end{theorem}
+If a complex-valued function $f: \mathbb{C} \rightarrow \mathbb{C}$ is analytic at $z(=x+iy)$, then the following equations hold. ($x\in \mathbb{R}$ and $y\in \mathbb{R}$)
+\begin{align*}
+  \frac{\partial u}{\partial x} &= \frac{\partial v}{\partial y} \\
+  \frac{\partial u}{\partial y} &= -\frac{\partial v}{\partial x}
+\end{align*}
+where $u: \mathbb{R}^2 \rightarrow \mathbb{R}$ and $v: \mathbb{R}^2 \rightarrow \mathbb{R}$ are real part and imaginary part of $f$.
+This means that $f(z) = f(x+iy) = u(x,y) + iv(x,y)$\\
+\begin{proof}
+  Since $f$ is analytic at $z$, there exists $\alpha \in \mathbb{C}$ which satisfies,
+  \begin{equation*}
+    f(z+\Delta z) - f(z) = \alpha \Delta z + o(\Delta z)
+  \end{equation*}
+  where $o$ is a Landau's little-o notation.
+  (This means that $\alpha$ does not change by how $\Delta z$ approaches to zero.)
+
+  If we write this using $u$ and $v$, we obtain
+  \begin{align*}
+    &\left( u(x+\Delta x, y+\Delta y) + iv(x+\Delta x, y+\Delta y) \right) - \left( u(x, y) + iv(x, y) \right) \\
+    & \quad = \alpha \left( \Delta x + i\Delta y \right) + o\left( \sqrt{\Delta x^2 + \Delta y^2}\right)
+  \end{align*}
+  
+  This equation holds even if we consider $\Delta y=0$ and let $\Delta x$ approach to zero.
+  Hence,
+  \begin{equation*}
+    \left( u(x+\Delta x, y) + iv(x+\Delta x, y) \right) - \left( u(x, y) + iv(x, y) \right)
+    = \alpha \Delta x + o\left( \Delta x \right)
+  \end{equation*}
+  ($o(\left| \Delta x \right|)$ is equivalent to $o(\Delta x)$)\\
+  
+  Therefore,
+  \begin{equation*}
+    \frac{u(x+\Delta x, y) - u(x, y)}{\Delta x} + i \frac{v(x+\Delta x, y) - v(x, y)}{\Delta x} = \alpha + \frac{o\left( \Delta x \right)}{\Delta x}
+  \end{equation*}
+  As $\Delta x \rightarrow 0$,
+  \begin{equation*}
+    \frac{\partial u}{\partial x} + i \frac{\partial v}{\partial x} = \alpha
+  \end{equation*}
+
+  Similarly, we consider $\Delta x=0$ and make $\Delta y$ approach to zero.
+  \begin{equation*}
+    \left( u(x, y+\Delta y) + iv(x, y+\Delta y) \right) - \left( u(x, y) + iv(x, y) \right)
+    = i \alpha \Delta y + o\left( \Delta y \right)
+  \end{equation*}
+ 
+  Therefore,
+  \begin{equation*}
+    -i \frac{u(x, y+\Delta y) - u(x, y)}{\Delta y} + \frac{v(x, y+\Delta y) - v(x, y)}{\Delta y} = \alpha + \frac{o\left( \Delta y \right)}{\Delta y}
+  \end{equation*}
+  As $\Delta y \rightarrow 0$,
+  \begin{equation*}
+    -i\frac{\partial u}{\partial y} +  \frac{\partial v}{\partial y} = \alpha
+  \end{equation*}
+  
+  By comparing $\alpha$ obtained by the above, we obtain
+  \begin{align*}
+    \frac{\partial u}{\partial x} &= \frac{\partial v}{\partial y} \\
+    \frac{\partial u}{\partial y} &= -\frac{\partial v}{\partial x}
+  \end{align*}
+\end{proof}
+
+
+\end{document}
