@@ -1,0 +1,83 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+\usepackage{adjustbox}
+\usepackage{graphicx}
+\usepackage[final]{pdfpages}
+\usepackage{bm}
+\usepackage{sectsty}
+\usepackage{titlesec}
+\usepackage{lipsum}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{pgffor}
+\usepackage{rotating}
+\usepackage{xcolor}  
+\usepackage{amsthm}
+\usepackage{csvsimple}
+\usepackage{enumitem}
+\usepackage{amssymb} 
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+% \setlength{\tabcolsep}{0.5cm} 
+\newcommand{\thickhat}[1]{\mathbf{\hat{\text{$#1$}}}}
+\renewcommand{\lstlistingname}{Program}
+
+\newtheoremstyle{custom}
+  {3pt}
+  {3pt}
+  {\itshape}
+  {} 
+  {\bfseries}
+  {. }  
+  { }   
+  {\thmname{#1} \thmnumber{#2} \thmnote{ #3}}
+
+\theoremstyle{custom}
+
+
+\newtheorem{definition}{Definition}
+% \newtheorem{theorem}{Theorem}
+\newtheorem*{theorem}{Theorem}
+\sectionfont{\fontsize{12}{15}\selectfont}
+\titleformat{\section}
+{\normalfont\normalsize\bfseries}
+{(\thesection)}{1em}{}
+
+\title{Cauchy's Integral Theorem}
+\author{Masaru Sawata}
+\begin{document}
+
+\maketitle
+
+\begin{theorem}[Cauchy's Integral Theorem]
+\end{theorem}
+Let $\Omega \subset \mathbb{C}$ be a simply connected domain, and let $f$ be analytic on $\Omega$. Then for any piecewise smooth, closed curve $C \subset \Omega$:
+
+\begin{equation*}
+  \oint_C f(z) dz = 0
+\end{equation*}\\
+\begin{proof}
+  Let $u$ and $v$ be real part of $f$ and imaginary part of $f$, respectively.
+  Additionally, let $x$ and $y$ be the real part and imaginary part of $z \in \mathbb{C} $.
+  This means
+  \begin{equation*}
+    f(z) = f(x + iy) = u(x, y) + iv(x, y)
+  \end{equation*}
+
+  Hence, 
+  \begin{align*}
+    f(z) \Delta z &= \left( u(x, y) + iv(x, y) \right) \left( \Delta x + i\Delta y \right) \\
+                  &= u(x, y) \Delta x - v(x, y)\Delta y +  i \left( v(x, y) \Delta x + u(x, y) \Delta y \right)
+  \end{align*}
+  Therefore,
+  \begin{align*}
+    \oint_C f(z) dz &= \oint_C \left( u \, dx - v \, dy \right)  + i  \oint_C \left( v \, dx - u \, dy \right)\\
+    &= \int_\Omega \left( -\frac{\partial v}{\partial x} - \frac{\partial u}{\partial y} \right) \, dxdy + i \int_\Omega \left( \frac{\partial u}{\partial x} - \frac{\partial v}{\partial y} \right) \, dxdy \quad \text{(Green's Theorem)}\\
+    &= 0 \quad \text{(Cauchy--Riemann Equations)}
+  \end{align*}
+\end{proof}
+
+
+\end{document}
