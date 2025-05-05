@@ -1,0 +1,74 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+\usepackage{adjustbox}
+\usepackage{graphicx}
+\usepackage[final]{pdfpages}
+\usepackage{bm}
+\usepackage{sectsty}
+\usepackage{titlesec}
+\usepackage{lipsum}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{pgffor}
+\usepackage{rotating}
+\usepackage{xcolor}  
+\usepackage{amsthm}
+\usepackage{csvsimple}
+\usepackage{enumitem}
+\usepackage{amssymb} 
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+% \setlength{\tabcolsep}{0.5cm} 
+\newcommand{\thickhat}[1]{\mathbf{\hat{\text{$#1$}}}}
+\renewcommand{\lstlistingname}{Program}
+
+\newtheoremstyle{custom}
+  {3pt}
+  {3pt}
+  {\itshape}
+  {} 
+  {\bfseries}
+  {. }  
+  { }   
+  {\thmname{#1} \thmnumber{#2} \thmnote{ #3}}
+
+\theoremstyle{custom}
+
+
+\newtheorem{definition}{Definition}
+% \newtheorem{theorem}{Theorem}
+\newtheorem*{theorem}{Theorem}
+\sectionfont{\fontsize{12}{15}\selectfont}
+\titleformat{\section}
+{\normalfont\normalsize\bfseries}
+{(\thesection)}{1em}{}
+
+\title{Unit in Petroleum Engineering}
+\author{Masaru Sawata}
+\begin{document}
+
+\maketitle
+In the field of petroleum engineering, many engineers (myself included) have experienced frustration with the units used in equations.
+It is often necessary to remember which units are required in each specific equation.
+
+For example, we need to use different units for $q$ in the following two equations: the first uses STB/day, while the second uses MSCF/day.
+
+\begin{equation*}
+  p_e - p_{wf} = \frac{141.2 qB\mu}{kh} \ln \frac{r_e}{r_w}
+\end{equation*}
+\begin{equation*}
+  p_e^2 - p_{wf}^2 = \frac{1424 q z \mu T}{kh} \ln \frac{r_e}{r_w}
+\end{equation*}
+
+It can be rather cumbersome to always check what units are assumed in each equation.
+
+I prefer the approach of considering each variable as inherently carrying its own unit.
+For example, we can think of $q$ as having a value of 10 and a unit of bbl/day.
+By adopting this perspective, we don't need to worry about units when writing equations;
+we only need to handle units carefully during the actual calculation.
+
+This idea is not my own -- I encountered it in the book \textit{Thermodynamics} (in Japanese) by Haruaki Tasaki, which is one of my favorite books.
+
+\end{document}
