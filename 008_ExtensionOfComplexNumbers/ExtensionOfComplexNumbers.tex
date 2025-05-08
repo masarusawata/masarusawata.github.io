@@ -1,0 +1,89 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+\usepackage{adjustbox}
+\usepackage{graphicx}
+\usepackage[final]{pdfpages}
+\usepackage{bm}
+\usepackage{sectsty}
+\usepackage{titlesec}
+\usepackage{lipsum}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{pgffor}
+\usepackage{rotating}
+\usepackage{xcolor}  
+\usepackage{amsthm}
+\usepackage{csvsimple}
+\usepackage{enumitem}
+\usepackage{amssymb} 
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+% \setlength{\tabcolsep}{0.5cm} 
+\newcommand{\thickhat}[1]{\mathbf{\hat{\text{$#1$}}}}
+\renewcommand{\lstlistingname}{Program}
+
+\newtheoremstyle{custom}
+  {3pt}
+  {3pt}
+  {\itshape}
+  {} 
+  {\bfseries}
+  {. }  
+  { }   
+  {\thmname{#1} \thmnumber{#2} \thmnote{ #3}}
+
+\theoremstyle{custom}
+
+
+\newtheorem{definition}{Definition}
+% \newtheorem{theorem}{Theorem}
+\newtheorem*{theorem}{Theorem}
+\sectionfont{\fontsize{12}{15}\selectfont}
+\titleformat{\section}
+{\normalfont\normalsize\bfseries}
+{(\thesection)}{1em}{}
+
+\title{The Limits of Extending the Complex Numbers}
+\author{Masaru Sawata}
+\begin{document}
+\maketitle
+A complex number is an element of the field $\mathbb{C}$.
+
+When I was in high school, I wondered why we only cared about  $\sqrt{-1}$.
+Of course, we can express $\sqrt{i}$ by a unique complex number, 
+but there may be additional element, for example, $j$ to extend the number we deal with.
+
+Of course, we can express $\sqrt{i}$ as a unique complex number,
+but I thought there might be other elements--like a new symbol 
+$j$--that could extend the number system we use.
+
+
+At that time, I didn't realize how many useful and beautiful results can be derived simply by introducing $i$.
+However, adding a new element like $j$ would destroy the structure of a field.
+I came across this discussion in one of my favorite books, ``Introduction to Complex Functions" by Michio Jimbo.
+
+Suppose there exists a field in which every number can be uniquely written as $a+bi+cj$ with $a,b,c \in \mathbb{R}$.
+Then, $j^2$ must also be expressible in the same form:
+\begin{equation*}
+  j^2 = a + bi + cj
+\end{equation*}
+This leads to a quadratic equation, which means we could express $j$ using just complex numbers.
+But that contradicts the assumption that $a+bi+cj$ gives a unique representation.
+In other words, any $a+bi+cj$ can be expressed using $a^\prime + b^\prime i$ with $a^\prime, b^\prime \in \mathbb{R}$.
+
+Therefore, no such field can exist.
+
+Although we failed to add another element to the complex numbers while preserving field properties, there is an interesting historical development.
+Hamilton introduced quaternions, where numbers are expressed as $a+bi+cj+dk$ with $a,b,c,d \in \mathbb{R}$.
+
+These elements satisfy $i^2 = j^2 = k^2 = ijk = -1$.
+Of course, quaternions do not form a field.
+
+There is a fascinating fact: multiplication of quaternions encodes both the dot product and the cross product simultaneously.
+
+In fact, there is an even larger number system called the octonions,
+but as we add more elements, we lose more of the familiar properties of arithmetic operations.
+
+\end{document}
