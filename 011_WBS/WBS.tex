@@ -1,0 +1,112 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+\usepackage{adjustbox}
+\usepackage{graphicx}
+\usepackage[final]{pdfpages}
+\usepackage{bm}
+\usepackage{sectsty}
+\usepackage{titlesec}
+\usepackage{lipsum}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{pgffor}
+\usepackage{rotating}
+\usepackage{xcolor}  
+\usepackage{amsthm}
+\usepackage{csvsimple}
+\usepackage{enumitem}
+\usepackage{amssymb} 
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+% \setlength{\tabcolsep}{0.5cm} 
+\newcommand{\thickhat}[1]{\mathbf{\hat{\text{$#1$}}}}
+\renewcommand{\lstlistingname}{Program}
+
+\newtheoremstyle{custom}
+  {3pt}
+  {3pt}
+  {\itshape}
+  {} 
+  {\bfseries}
+  {. }  
+  { }   
+  {\thmname{#1} \thmnumber{#2} \thmnote{ #3}}
+
+\theoremstyle{custom}
+
+
+\newtheorem{definition}{Definition}
+% \newtheorem{theorem}{Theorem}
+\newtheorem*{theorem}{Theorem}
+\sectionfont{\fontsize{12}{15}\selectfont}
+\titleformat{\section}
+{\normalfont\normalsize\bfseries}
+{(\thesection)}{1em}{}
+
+\title{An Elegant Method for Incorporating the Wellbore Storage Effect in the Laplace Domain}
+\author{Masaru Sawata}
+\begin{document}
+\maketitle
+There is an interesting technique for incorporating the wellbore storage effect into the constant-rate analytical solution.
+This is one of my favorite topics in pressure transient analysis.
+
+If we have a constant (sandface) rate solution $p_{wDc}(t_D)$ (dimensionless pressure), which may or may not include skin effect,
+we can derive an analytical solution for a variable-rate problem by applying the principle of superposition.
+
+First, we discretize the sand face rate:
+\begin{equation*}
+  p_{wD} \approx \frac{1}{q} \sum_{i=1}^{n} (q_{sf,i} - q_{sf,i-1}) p_{wDc} \left( t_{D} - t_{D,i-1} \right)
+\end{equation*}
+where $p_{wD}$ is the dimensionless pressure  that accounts for wellbore storage, $q$ is the (constant) surface rate, and $q_{sf}$ is the sand face rate.
+Here, the subscript $i$ denotes denotes discretized time steps.
+
+We define the dimensionless rate as $q_D = \displaystyle \frac{q_{sf}}{q}$, so the expression becomes:
+\begin{equation*}
+  p_{wD} \approx \sum_{i=1}^{n} (q_{D,i} - q_{D,i-1}) p_{wDc}\left( t_{D} - t_{D,i-1} \right)
+\end{equation*}
+\begin{equation*}
+  p_{wD} \approx \sum_{i=1}^{n} \frac{q_{D,i} - q_{D,i-1}}{t_{D,i} - t_{D,i-1}} \left[ p_{wDc}\left( t_{D} - t_{D,i-1} \right) \right] \left( t_{D,i} - t_{D,i-1} \right)
+\end{equation*}
+
+If we take the limit $n \rightarrow \infty$ (divide the interval so that the $q_{D,i} - q_{D,i-1}$ becomes infinitesimaly small), 
+\begin{equation*}
+  p_{wD} = \int_{0}^{t_D} \frac{d}{d \tau}q_D(\tau) p_{wDc}(t_D - \tau) \, d\tau
+\end{equation*}
+This is a convolution integral.  Therefore, in the Laplace domain:
+\begin{equation}
+  \label{eq1}
+  \mathcal{L} \left[ p_{wD} \right] = s \mathcal{L} \left[ q_D \right] \mathcal{L} \left[ p_{wDc} \right]
+\end{equation}
+where $s$ is Laplace variable.
+
+From the definition of the wellbore storage effect:
+\begin{equation*}
+  q_D + C_D \frac{d p_{wD}}{d t_D} = 1
+\end{equation*}
+Take the Laplace transform:
+\begin{equation*}
+  \mathcal{L} \left[ q_D \right] + s C_D \mathcal{L} \left[ p_{wD} \right]  = \frac{1}{s}
+\end{equation*}
+Rearranging:
+\begin{equation}
+  \label{eq2}
+  \mathcal{L} \left[ q_D \right]  = \frac{1}{s} - s C_D \mathcal{L} \left[ p_{wD} \right]
+\end{equation}
+
+Substituting Equation \ref{eq2} into Equation \ref{eq1}, we eliminate $\mathcal{L} \left[ q_D \right]$:
+\begin{equation*}
+  \mathcal{L} \left[ p_{wD} \right] = s \left( \frac{1}{s} - s C_D \mathcal{L} \left[ p_{wD} \right] \right) \mathcal{L} \left[ p_{wDc} \right]
+\end{equation*}
+\begin{equation*}
+  \left( 1 + s^2 C_D \mathcal{L} \left[ p_{wDc} \right] \right)\mathcal{L} \left[ p_{wD} \right] = \mathcal{L} \left[ p_{wDc} \right]
+\end{equation*}
+\begin{equation*}
+  \mathcal{L} \left[ p_{wD} \right] = \frac{\mathcal{L} \left[ p_{wDc} \right]}{1 + s^2 C_D \mathcal{L} \left[ p_{wDc} \right]}
+\end{equation*}
+
+This is a very interesting and elegant result.
+It shows that if we have the constant-rate solution, we can modify it to account for wellbore storage under a variable-rate condition.
+
+\end{document}
