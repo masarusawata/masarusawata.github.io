@@ -45,18 +45,57 @@
 {\normalfont\normalsize\bfseries}
 {(\thesection)}{1em}{}
 
-\title{Intuitive Way}
+\title{Understanding Change of Variables in Integration: Why the Jacobian Determinant Appears}
 \author{Masaru Sawata}
 \begin{document}
 \maketitle
-If we change the variables for the integration, we need to multiply the integrand by the absolute value of the determinant of the Jacobian matrix.
-There is an intuitive way to explain this.
 
-Here, we consider changing the variables from $(x_1, x_2, \cdots , x_n)$ to $(y_1, y_2, \cdots , y_n)$.
+When we change variables in an integral, we need to multiply the integrand by the absolute value of the determinant of the Jacobian matrix.
+There is an intuitive way to understand why this is the case.
 
+Let us consider a change of variables from $(x_1, x_2, \cdots , x_n)$ to $(y_1, y_2, \cdots , y_n)$.
+The volume of hyperrectangle in the new ($y$) coordinates, denoted by $\Delta V_y$ is given by $\displaystyle \prod_{i=1}^n \Delta y_i$, where $\Delta y_i > 0$.
+
+Each edge vector of the hyperrectangle in the $y$-coordinates corresponds to a vector $\vec{v}_i$ in the original $x$-coordinates:
 \begin{equation*}
-  \Delta y_i = y_i (x_1 + \Delta x_1, x_2+ \Delta x_2, \cdots , x_n+ \Delta x_n) - y_i (x_1, x_2, \cdots , x_n)
+  \vec{v}_i = \frac{\partial \vec{x}}{\partial y_i} \Delta y_i + \vec{\varepsilon}_i
 \end{equation*}
+where $\vec{\varepsilon}_i$ satisfies
+\begin{equation*}  
+  \lim_{\Delta y_i \rightarrow 0} \frac{\vec{\varepsilon}_i}{\Delta y_i} = 0
+\end{equation*}
+
+The volume $\Delta V_x$ of the corresponding parallelotope in the original coordinate system is:
+\begin{align*}
+  \Delta V_x &= \left| \det
+  \begin{pmatrix}
+    \displaystyle \frac{\partial \vec{x}}{\partial y_1} \Delta y_1 + \vec{\varepsilon}_1 & \cdots & \displaystyle \frac{\partial \vec{x}}{\partial y_n} \Delta y_n + \vec{\varepsilon}_n
+  \end{pmatrix}\right| \\
+  &=\left| \det 
+  \begin{pmatrix}
+    \displaystyle \frac{\partial \vec{x}}{\partial y_1} + \frac{\vec{\varepsilon}_1}{\Delta y_1} & \cdots & \displaystyle \frac{\partial \vec{x}}{\partial y_n} + \frac{\vec{\varepsilon}_n}{\Delta y_n} 
+  \end{pmatrix}\right|
+  \prod_{i=1}^n \Delta y_i \\
+  &= \left| \det \begin{pmatrix}
+    \displaystyle \frac{\partial \vec{x}}{\partial y_1} + \frac{\vec{\varepsilon}_1}{\Delta y_1} & \cdots & \displaystyle \frac{\partial \vec{x}}{\partial y_n} + \frac{\vec{\varepsilon}_n}{\Delta y_n} 
+  \end{pmatrix}\right| \Delta V_y
+\end{align*}
+
+Hence, the volume ratio is given by:
+\begin{equation*}
+  \left| \det 
+  \begin{pmatrix}
+    \displaystyle \frac{\partial \vec{x}}{\partial y_1} + \frac{\vec{\varepsilon}_1}{\Delta y_1} & \cdots & \displaystyle \frac{\partial \vec{x}}{\partial y_n} + \frac{\vec{\varepsilon}_n}{\Delta y_n} 
+  \end{pmatrix} \right|
+  \rightarrow \left| \det 
+  \begin{pmatrix}
+    \displaystyle \frac{\partial \vec{x}}{\partial y_1} & \cdots & \displaystyle \frac{\partial \vec{x}}{\partial y_n} 
+  \end{pmatrix} \right| \quad \text{as } \Delta y_i \rightarrow 0 \text{ for all } i
+\end{equation*}
+
+This is (the absolute value of) the determinant of the transpose of the Jacobian matrix.
+Since the determinant is unchanged under transposition, this is equal to the determinant of the Jacobian matrix itself.
+
 
 
 
