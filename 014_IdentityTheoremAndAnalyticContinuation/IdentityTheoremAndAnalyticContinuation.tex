@@ -1,0 +1,94 @@
+\documentclass[letterpaper, 12pt]{article}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+\usepackage{adjustbox}
+\usepackage{graphicx}
+\usepackage[final]{pdfpages}
+\usepackage{bm}
+\usepackage{sectsty}
+\usepackage{titlesec}
+\usepackage{lipsum}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{pgffor}
+\usepackage{rotating}
+\usepackage{xcolor}  
+\usepackage{amsthm}
+\usepackage{csvsimple}
+\usepackage{enumitem}
+\usepackage{amssymb} 
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+% \setlength{\tabcolsep}{0.5cm} 
+\newcommand{\thickhat}[1]{\mathbf{\hat{\text{$#1$}}}}
+\renewcommand{\lstlistingname}{Program}
+
+\newtheoremstyle{custom}
+  {3pt}
+  {3pt}
+  {\itshape}
+  {} 
+  {\bfseries}
+  {. }  
+  { }   
+  {\thmname{#1} \thmnumber{#2} \thmnote{ #3}}
+
+\theoremstyle{custom}
+
+
+\newtheorem{definition}{Definition}
+% \newtheorem{theorem}{Theorem}
+\newtheorem*{theorem}{}
+\sectionfont{\fontsize{12}{15}\selectfont}
+\titleformat{\section}
+{\normalfont\normalsize\bfseries}
+{(\thesection)}{1em}{}
+
+\title{Identity Theorem and Analytic Continuation}
+\date{}
+\begin{document}
+\maketitle
+\begin{theorem}[Identity Theorem]
+    Suppose $f(z)$ and $g(z)$ are analytic on a domain $\Omega$,
+    and that a sequence of points $z_n \in \Omega$, with $z_n \neq a$ for all $n$, converges to a point $a \in \Omega$.
+    If $f(z_n) = g(z_n)$ for all $n=1,2,3,\cdots$, then $f(z) = g(z)$ for all $z \in \Omega$.
+\end{theorem}
+
+Let $F(z) = f(z) - g(z)$.
+Since $f(z)$ and $g(z)$ are analytic on $\Omega$, $F(z)$ is also analytic and can be represented by a Taylor series expansion about $a$:
+\begin{equation*}
+  F(z) = \sum_{n=0}^{\infty} c_n (z-a)^n
+\end{equation*}
+At each point $z_n$, we have $F(z_n) = 0$.
+By analyticity, $F(z)$ is continuous at $a$, so
+\begin{equation*}
+  \lim_{n\rightarrow \infty} F(z_n) = F(a) = 0
+\end{equation*}
+Thus, $c_0 = 0$.
+
+
+Next, define $F_1(z) = \frac{F(z)}{z-a}$. (Note that $F_1(z)$ is analytic in a neighborhood of $a$ and has the same radius of convergence as $F(z)$.)
+Applying the same argument, we see that $c_1 = 0$.
+Continuing this process inductively, we conclude that $c_n = 0$ for all $n$.
+Therefore, $F(z)$ is identically zero in the neighborhood of $a$.
+
+Now, choose an arbitrary point $b \in \Omega$ and connect it to $a$ by a curve lying entirely within $\Omega$, parameterized as $z(t)$ with $z(0)=a$ and $z(1)=b$.
+Suppose, for contradiction, that there exists a maximal $t_0 < 1$ such that $F(z(t)) = 0$ for all $0 \leq t \leq t_0$.
+Consider a sequence $z_n = z(t_n)$, where $t_n \to t_0$ from below.
+Since $F(z_n) = 0$ and $F$ is analytic, its Taylor expansion at $z(t_0)$ must also vanish identically, and $F(z) = 0$ in a neighborhood of $z(t_0)$.
+This contradicts the maximality of $t_0$.
+Therefore, $F(z) = 0$ along the entire curve, and since $b$ was arbitrary, $F(z) \equiv 0$ on $\Omega$.
+Hence, $f(z) = g(z)$ on $\Omega$.\\
+
+
+From the Identity Theorem, if there is an analytic function $f_1(z)$ on a domain $\Omega_1$, and another analytic function $f_2(z)$ on a larger domain $\Omega_2 \supset \Omega_1$, with $f_1(z) = f_2(z)$ on 
+$\Omega_1$, then $f_2(z)$ is uniquely determined on $\Omega_2$; this extension is called analytic continuation.
+Thus, extending the domain allows us to study the global properties of the function.
+
+It is well known that the trigonometric and exponential functions are closely related on the complex plane.
+However, if we consider their behavior only on the real domain, we are restricting ourselves to just a part of the function.
+
+This proof closely follows the very insightful book, ``Introduction to Complex Function Theory'' (in Japanese), by Michio Jimbo.
+
+\end{document}
